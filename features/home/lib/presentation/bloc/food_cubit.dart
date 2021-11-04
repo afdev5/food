@@ -15,9 +15,6 @@ class FoodCubit extends Cubit<FoodState> {
   Future<void> getFoods({String? category}) async {
     try {
       emit(LoadingFoodState());
-      // List<FoodModel> res = category != null
-      //     ? await ApiService().getFoodsCategory(category: category)
-      //     : await ApiService().getFoodsRandom();
       final response = category != null
           ? await homeUseCase.getFoodWithCategory(category: category)
           : await homeUseCase.getFood();

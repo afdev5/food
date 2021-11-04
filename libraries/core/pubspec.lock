@@ -169,13 +169,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
-  cupertino_icons:
-    dependency: transitive
-    description:
-      name: cupertino_icons
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.3"
   dart_style:
     dependency: transitive
     description:
@@ -187,13 +180,6 @@ packages:
     dependency: "direct main"
     description:
       path: "../dependencies"
-      relative: true
-    source: path
-    version: "0.0.1"
-  detail:
-    dependency: transitive
-    description:
-      path: "../../features/detail"
       relative: true
     source: path
     version: "0.0.1"
@@ -232,13 +218,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
-  favorit:
-    dependency: "direct main"
-    description:
-      path: "../../features/favorit"
-      relative: true
-    source: path
-    version: "0.0.1"
   ffi:
     dependency: transitive
     description:
@@ -312,13 +291,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  home:
-    dependency: transitive
-    description:
-      path: "../../features/home"
-      relative: true
-    source: path
-    version: "1.0.0+1"
   http_multi_server:
     dependency: transitive
     description:
@@ -466,13 +438,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
-  shared:
-    dependency: transitive
-    description:
-      path: "../shared"
-      relative: true
-    source: path
-    version: "0.0.1"
   shelf:
     dependency: transitive
     description:

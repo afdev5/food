@@ -23,7 +23,6 @@ class RemoteHomeDataSourceImpl extends RemoteHomeDataSource {
   Future<FoodResponseModel> getFoodWithCategory(
       {required String category}) async {
     try {
-      // final response = await dio.get('$baseUrl/filter.php?c=$category');
       final response = await dio.get('/filter.php?c=$category');
       return FoodResponseModel.fromJson(response.data);
     } on DioError catch (e) {

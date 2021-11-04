@@ -10,10 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  
-  favorit:
-    path: ../../features/favorit
     
   # our module
   dependencies:

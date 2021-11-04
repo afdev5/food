@@ -1,11 +1,12 @@
 import 'dart:io';
 
 import 'package:core/db/table/food_table.dart';
-import 'package:favorit/data/datasources/dao/favorit_dao.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart' show getDatabasesPath;
 import 'package:flutter/services.dart' show rootBundle;
+
+import 'dao/favorit_dao.dart';
 
 part 'database_module.g.dart';
 

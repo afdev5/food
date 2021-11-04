@@ -7,13 +7,11 @@ class FoodResponseModel {
 
   String message;
   bool error;
-  // FoodModel data;
   List<FoodModel> data;
 
   factory FoodResponseModel.fromJson(Map<String, dynamic> json) => FoodResponseModel(
         message: json['message'],
         error: json['error'],
-        // data: FoodModel.fromMap(json['data']),
         data: List<FoodModel>.from(
             json['meals'].map((x) => FoodModel.fromMap(x))),
       );
@@ -21,7 +19,6 @@ class FoodResponseModel {
   Map<String, dynamic> toJson() => {
         'message': message,
         'error': error,
-        // 'data': data.toMap(),
         'meals': data.map((e) => e.toMap()).toList()
       };
 }

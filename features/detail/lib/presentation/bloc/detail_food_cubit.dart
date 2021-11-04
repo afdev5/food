@@ -26,4 +26,33 @@ class DetailFoodCubit extends Cubit<DetailFoodState> {
       emit(Error(message: e.toString()));
     }
   }
+
+  Future<void> insertAndDeleteFavorit({required FoodEntity data}) async {
+    emit(LoadingDetailFoodState());
+    if (data.isFav) {
+      detailUseCase.removeFavoritFood(id: data.id).then((value) {
+        emit(SuccessDetailFoodState(
+            data: FoodEntity(
+                id: data.id,
+                title: data.title,
+                desc: data.desc,
+                image: data.image,
+                isFav: false)));
+      }).onError((err, stackTrace) {
+        print(err);
+      });
+    } else {
+      detailUseCase.insertFavoritFood(food: data).then((value) {
+        emit(SuccessDetailFoodState(
+            data: FoodEntity(
+                id: data.id,
+                title: data.title,
+                desc: data.desc,
+                image: data.image,
+                isFav: true)));
+      }).onError((err, stackTrace) {
+        print(err);
+      });
+    }
+  }
 }
