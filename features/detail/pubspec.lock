@@ -57,6 +57,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
+  core:
+    dependency: transitive
+    description:
+      path: "../../libraries/core"
+      relative: true
+    source: path
+    version: "0.0.1"
   cupertino_icons:
     dependency: transitive
     description:
@@ -99,6 +106,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
+  favorit:
+    dependency: transitive
+    description:
+      path: "../favorit"
+      relative: true
+    source: path
+    version: "0.0.1"
   ffi:
     dependency: transitive
     description:
