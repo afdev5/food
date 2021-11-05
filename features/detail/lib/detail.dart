@@ -1,6 +1,7 @@
 import 'package:detail/data/datasources/local_detail_data_source.dart';
 import 'package:detail/presentation/bloc/detail_food_cubit.dart';
 import 'package:detail/presentation/ui/detail_screen.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:dio/dio.dart';
 import 'data/datasources/remote_detail_data_source.dart';

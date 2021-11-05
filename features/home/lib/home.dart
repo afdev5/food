@@ -1,4 +1,4 @@
-import 'package:detail/detail.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:dio/dio.dart';
 import 'package:home/data/datasources/remote_home_data_source.dart';
@@ -11,7 +11,6 @@ import 'package:home/presentation/ui/home_screen.dart';
 class FeatureHomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        // Bind((_) => RemoteHomeDataSourceImpl(dio: Dio())),
         Bind((_) => RemoteHomeDataSourceImpl(dio: Modular.get<Dio>())),
         Bind((_) => HomeRepositoriesImpl(
             remoteDataSource: Modular.get<RemoteHomeDataSource>())),
@@ -21,13 +20,6 @@ class FeatureHomeModule extends ChildModule {
       ];
 
   @override
-  List<ModularRouter> get routers => [
-        ModularRouter('/', child: (context, args) => HomeScreen())
-        // ChildRoute('/', child: (context, args) => HomeScreen()),
-        // ModuleRoute('/detail', module: FeatureDetailModule())
-      ];
-
-  // @override
-  // // TODO: implement routers
-  // List<ModularRouter> get routers => throw UnimplementedError();
+  List<ModularRouter> get routers =>
+      [ModularRouter('/', child: (context, args) => HomeScreen())];
 }
