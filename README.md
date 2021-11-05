@@ -1,4 +1,4 @@
 # Food Apps
 
-Clean Architecture
+Clean Architecture,
 Flutter Modular
