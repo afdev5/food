@@ -1,5 +1,5 @@
 import 'package:detail/data/datasources/local_detail_data_source.dart';
-import 'package:detail/presentation/bloc/detail_food_cubit.dart';
+import 'package:detail/presentation/bloc/detail_bloc.dart';
 import 'package:detail/presentation/ui/detail_screen.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_modular/flutter_modular.dart';
@@ -22,7 +22,7 @@ class FeatureDetailModule extends ChildModule {
         Bind((_) =>
             DetailUseCaseImpl(repositories: Modular.get<DetailRepositories>())),
         Bind(
-            (_) => DetailFoodCubit(detailUseCase: Modular.get<DetailUseCase>()))
+            (_) => DetailBloc(detailUseCase: Modular.get<DetailUseCase>()))
       ];
 
   @override

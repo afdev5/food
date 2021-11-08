@@ -1,4 +1,5 @@
-import 'package:favorit/presentation/bloc/favorit_food_cubit.dart';
+
+import 'package:favorit/presentation/bloc/favorit_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +18,7 @@ class FavoritScreen extends StatefulWidget {
 class _FavoritScreenState extends State<FavoritScreen> {
   @override
   Widget build(BuildContext context) {
-    Modular.get<FavoritFoodCubit>().getFood();
+    Modular.get<FavoritBloc>().add(GetFoodsEvent());
     return Scaffold(
       appBar: AppBar(
         title: const Text("Your Favorit Food"),
@@ -27,10 +28,10 @@ class _FavoritScreenState extends State<FavoritScreen> {
   }
 
   Widget _buildContent() {
-    return BlocBuilder<FavoritFoodCubit, FavoritFoodState>(
-        bloc: Modular.get<FavoritFoodCubit>(),
+    return BlocBuilder<FavoritBloc, FavoritState>(
+        bloc: Modular.get<FavoritBloc>(),
         builder: (context, state) {
-          if (state is SuccessFavoritFoodState) {
+          if (state is SuccessFavoritState) {
             return FoodGridView(
                 itemCount: state.datas.length,
                 itemBuilder: (context, i) {
@@ -46,7 +47,7 @@ class _FavoritScreenState extends State<FavoritScreen> {
                         image: e.image,
                       ));
                 });
-          } else if (state is EmptyFavoritFoodState) {
+          } else if (state is EmptyFavoritState) {
             return const Center(
               child: Text("Belum memiliki favorit food"),
             );

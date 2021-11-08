@@ -1,9 +1,9 @@
-part of 'food_cubit.dart';
+part of 'food_bloc.dart';
 
 @immutable
 abstract class FoodState {}
 
-class FoodInitial extends FoodState {}
+class FoodInitial extends FoodState {} 
 
 class LoadingFoodState extends FoodState {}
 
