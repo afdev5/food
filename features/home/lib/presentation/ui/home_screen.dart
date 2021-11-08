@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:home/domain/entities/food_entity.dart';
-import 'package:home/presentation/bloc/food_cubit.dart';
+import 'package:home/presentation/bloc/food_bloc.dart';
 import 'package:shared/widget/food_card.dart';
 import 'package:shared/widget/food_gridview.dart';
 import 'package:shared/widget/loading_food_card.dart';
@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    Modular.get<FoodCubit>().getFoods(category: category);
+    Modular.get<FoodBloc>().add(GetFoodsEvent(category: category));
   }
 
   @override
@@ -40,12 +40,11 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-  
 
   Widget _buildContent() {
     return Flexible(
-      child: BlocBuilder<FoodCubit, FoodState>(
-          bloc: Modular.get<FoodCubit>(),
+      child: BlocBuilder<FoodBloc, FoodState>(
+          bloc: Modular.get<FoodBloc>(),
           builder: (context, state) {
             if (state is SuccessFoodsState) {
               return FoodGridView(
@@ -92,60 +91,36 @@ class _HomeScreenState extends State<HomeScreen> {
           shrinkWrap: true,
           physics: const ScrollPhysics(),
           children: [
-            InkWell(
-                onTap: () {
-                  setState(() => category = "Dessert");
-                  Modular.get<FoodCubit>().getFoods(category: category);
-                },
-                child: _btnCategory("Dessert")),
-            InkWell(
-                onTap: () {
-                  setState(() => category = "Breakfast");
-                  Modular.get<FoodCubit>().getFoods(category: category);
-                },
-                child: _btnCategory("Breakfast")),
-            InkWell(
-                onTap: () {
-                  setState(() => category = "Chicken");
-                  Modular.get<FoodCubit>().getFoods(category: category);
-                },
-                child: _btnCategory("Chicken")),
-            InkWell(
-                onTap: () {
-                  setState(() => category = "Beef");
-                  Modular.get<FoodCubit>().getFoods(category: category);
-                },
-                child: _btnCategory("Beef")),
-            InkWell(
-                onTap: () {
-                  setState(() => category = "Seafood");
-                  Modular.get<FoodCubit>().getFoods(category: category);
-                },
-                child: _btnCategory("Seafood")),
-            InkWell(
-                onTap: () {
-                  setState(() => category = "Vegetarian");
-                  Modular.get<FoodCubit>().getFoods(category: category);
-                },
-                child: _btnCategory("Vegetarian")),
+            _btnCategory("Dessert"),
+            _btnCategory("Breakfast"),
+            _btnCategory("Chicken"),
+            _btnCategory("Beef"),
+            _btnCategory("Seafood"),
+            _btnCategory("Vegetarian"),
           ],
         ));
   }
 
   Widget _btnCategory(String title) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.only(right: 6, left: 6),
-      width: 100,
-      decoration: BoxDecoration(
-        color: title.toLowerCase() == category.toLowerCase()
-            ? Colors.blue
-            : Colors.white,
-        borderRadius: BorderRadius.circular(20),
+    return InkWell(
+      onTap: () {
+        setState(() => category = title);
+        Modular.get<FoodBloc>().add(GetFoodsEvent(category: category));
+      },
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        margin: const EdgeInsets.only(right: 6, left: 6),
+        width: 100,
+        decoration: BoxDecoration(
+          color: title.toLowerCase() == category.toLowerCase()
+              ? Colors.blue
+              : Colors.white,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Center(
+            child: Text(title,
+                style: const TextStyle(fontWeight: FontWeight.w500))),
       ),
-      child: Center(
-          child:
-              Text(title, style: const TextStyle(fontWeight: FontWeight.w500))),
     );
   }
 

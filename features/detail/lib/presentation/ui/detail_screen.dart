@@ -1,4 +1,4 @@
-import 'package:detail/presentation/bloc/detail_food_cubit.dart';
+import 'package:detail/presentation/bloc/detail_bloc.dart';
 import 'package:flutter/cupertino.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_modular/flutter_modular.dart';
@@ -19,7 +19,7 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   void initState() {
     super.initState();
-    Modular.get<DetailFoodCubit>().getFood(id: widget.data.id);
+    Modular.get<DetailBloc>().add(GetFood(id: widget.data.id));
   }
 
   @override
@@ -27,8 +27,8 @@ class _DetailScreenState extends State<DetailScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: BlocBuilder<DetailFoodCubit, DetailFoodState>(
-        bloc: Modular.get<DetailFoodCubit>(),
+      body: BlocBuilder<DetailBloc, DetailState>(
+        bloc: Modular.get<DetailBloc>(),
         builder: (context, state) {
           return SafeArea(
             child: Column(
@@ -43,7 +43,7 @@ class _DetailScreenState extends State<DetailScreen> {
     );
   }
 
-  Widget _buildContent({required Size size, required DetailFoodState state}) {
+  Widget _buildContent({required Size size, required DetailState state}) {
     return Expanded(
         child: Container(
       padding: const EdgeInsets.all(16),
@@ -67,7 +67,7 @@ class _DetailScreenState extends State<DetailScreen> {
             ),
             const SizedBox(height: 5),
             //checking data
-            state is SuccessDetailFoodState
+            state is SuccessDetailState
                 ? Text(state.data.desc)
                 : loadingShimmer()
           ],
@@ -76,8 +76,7 @@ class _DetailScreenState extends State<DetailScreen> {
     ));
   }
 
-  Widget _buildImageHeader(
-      {required Size size, required DetailFoodState state}) {
+  Widget _buildImageHeader({required Size size, required DetailState state}) {
     return Stack(
       children: [
         //image
@@ -106,16 +105,15 @@ class _DetailScreenState extends State<DetailScreen> {
           right: 0,
           child: iconBtn(
               onTap: () {
-                Modular.get<DetailFoodCubit>().insertAndDeleteFavorit(
-                    data: state is SuccessDetailFoodState
+                Modular.get<DetailBloc>().add(InsertAndDeleteFavorit(
+                    food: state is SuccessDetailState
                         ? state.data
-                        : widget.data);
+                        : widget.data));
               },
               icon: Icon(
-                  state is SuccessDetailFoodState && state.data.isFav
+                  state is SuccessDetailState && state.data.isFav
                       ? Icons.favorite
                       : Icons.favorite_border_outlined,
-                  // Icons.favorite_border_outlined,
                   size: 28,
                   color: Colors.black)),
         ),

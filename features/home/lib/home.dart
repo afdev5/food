@@ -5,7 +5,7 @@ import 'package:home/data/datasources/remote_home_data_source.dart';
 import 'package:home/data/repositories/home_repositories_impl.dart';
 import 'package:home/domain/repositories/home_repositories.dart';
 import 'package:home/domain/usecase/home_usecase.dart';
-import 'package:home/presentation/bloc/food_cubit.dart';
+import 'package:home/presentation/bloc/food_bloc.dart';
 import 'package:home/presentation/ui/home_screen.dart';
 
 class FeatureHomeModule extends ChildModule {
@@ -16,7 +16,7 @@ class FeatureHomeModule extends ChildModule {
             remoteDataSource: Modular.get<RemoteHomeDataSource>())),
         Bind((_) =>
             HomeUseCaseImpl(repositories: Modular.get<HomeRepositories>())),
-        Bind((_) => FoodCubit(homeUseCase: Modular.get<HomeUseCase>()))
+        Bind((_) => FoodBloc(homeUseCase: Modular.get<HomeUseCase>()))
       ];
 
   @override
